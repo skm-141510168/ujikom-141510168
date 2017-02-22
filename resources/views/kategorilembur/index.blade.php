@@ -8,7 +8,7 @@
 					<div class="table-responsive table-bordered">
 						<table class="table">
 							<thead >
-								<tr class="success">
+								<tr class="active">
 									<th>Kode Kategori Lembur</th>									
 									<th>Jabatan</th>
 									<th>Golongan</th>

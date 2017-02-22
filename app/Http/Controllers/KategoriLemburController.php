@@ -30,9 +30,10 @@ class KategoriLemburController extends Controller
      */
     public function create()
     {
+        $kategori_lembur = kategori_lembur::all();
         $golongan = golongan::all();
         $jabatan = jabatan::all();
-        return view('kategorilembur.create',compact('golongan','jabatan'));
+        return view('kategorilembur.create',compact('kategori_lembur','golongan','jabatan'));
     }
 
     /**
@@ -99,7 +100,11 @@ class KategoriLemburController extends Controller
      */
     public function edit($id)
     {
-        //
+
+       $jabatan=jabatan::all();
+       $golongan=golongan::all(); 
+       $kategori_lembur=kategori_lembur::find($id);
+       return view('kategorilembur.edit',compact('jabatan','golongan','kategori_lembur'));
     }
 
     /**
@@ -111,7 +116,10 @@ class KategoriLemburController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $kategori_lembur_Update=Request::all();
+         $kategori_lembur=kategori_lembur::find($id);
+         $kategori_lembur->update($kategori_lembur_Update);
+         return redirect('kategorilembur');
     }
 
     /**

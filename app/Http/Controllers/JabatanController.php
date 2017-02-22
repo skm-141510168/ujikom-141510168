@@ -14,10 +14,10 @@ class JabatanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('SA');
-    }
+    //public function __construct()
+    //{
+    //   $this->middleware('SA');
+    //}
     public function index()
     {
         $jabatan = jabatan::all();
@@ -88,7 +88,8 @@ class JabatanController extends Controller
      */
     public function edit($id)
     {
-        //
+       $jabatan=jabatan::find($id);
+       return view('jabatan.edit',compact('jabatan'));
     }
 
     /**
@@ -100,7 +101,10 @@ class JabatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $jabatanUpdate=Request::all();
+         $jabatan=jabatan::find($id);
+         $jabatan->update($jabatanUpdate);
+         return redirect('jabatan');
     }
 
     /**
