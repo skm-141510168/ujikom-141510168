@@ -52,7 +52,7 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-$rules = [  'name' => 'required|max:255',
+        $rules = [  'name' => 'required|max:255',
             'nip'  => 'required|numeric|min:3|unique:pegawais',
             'email' => 'required|email|max:255|unique:users',
             'permission' => 'required|max:255',
@@ -64,7 +64,7 @@ $rules = [  'name' => 'required|max:255',
                 'nip.unique' => 'Data Sudah Ada',
                 'nip.numeric' => 'Harus Angka',
                 'email.required' => 'Harus Diisi',
-                'email.unque' => 'Data Sudah Ada',
+                'email.unique' => 'Data Sudah Ada',
                 'jabatan_id.required' => 'Harus Diisi',
                 'golongan_id.required' => 'Harus Diisi',
                 'photo.required' => 'Harus Diisi',
@@ -131,7 +131,13 @@ $rules = [  'name' => 'required|max:255',
      */
     public function edit($id)
     {
-        //
+      
+       $golongan=golongan::all();
+       $jabatan=jabatan::all(); 
+       $pegawai=pegawai::find($id);
+       $user=User::all();
+       return view('pegawai.edit',compact('golongan','jabatan','pegawai','user'));
+     
     }
 
     /**
@@ -143,7 +149,25 @@ $rules = [  'name' => 'required|max:255',
      */
     public function update(Request $request, $id)
     {
-        //
+       
+        $file = Input::file('photo');
+        $destinationPath = public_path().'/assets/image/';
+        $filename = $file->getClientOriginalName();
+        $uploadSuccess = $file->move($destinationPath, $filename);
+        {
+        if(Input::hasFile('photo'))
+            $pegawai =pegawai::find('id');
+            $pegawai->nip =$request->get('nip');
+            $pegawai->jabatan_id =$request->get('jabatan_id');
+            $pegawai->golongan_id =$request->get('golongan_id');
+        } 
+            $user=User::all();
+           // $pegawai->user_id = $user->id;
+            $pegawai->photo = $filename;
+            $pegawai->update();
+               
+            return redirect('/pegawai');
+         
     }
 
     /**

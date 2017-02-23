@@ -1,4 +1,4 @@
-@extends('layouts.aa')
+@extends('layouts.vv')
 @section('content')
 
     <h1>Update Jabatan</h1>

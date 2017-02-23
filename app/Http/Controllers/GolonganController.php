@@ -16,7 +16,17 @@ class GolonganController extends Controller
      */
     public function index()
     {
-        $golongan = golongan::all();
+       $golongan = golongan::all();
+
+
+       if (request()->has('nama_golongan')) 
+       {
+           $golongan=golongan::where('nama_golongan',request('nama_golongan'))->paginate(5);
+       }
+       else
+       {
+           $golongan=golongan::paginate(5);
+       }
         return view('golongan.index',compact('golongan'));
     }
 

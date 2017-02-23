@@ -21,6 +21,11 @@ class PenggajianController extends Controller
     public function index()
     {
         return view('penggajian.index');
+
+
+        $penggajian = penggajian::with('tunjangan_pegawai')->get();
+        $penggajian = penggajian::all();
+        return view('penggajian.index',compact('tunjangan_pegawai'));
     }
 
     /**
