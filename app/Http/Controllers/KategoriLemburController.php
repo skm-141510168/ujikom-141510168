@@ -20,6 +20,16 @@ class KategoriLemburController extends Controller
         $kategori_lembur = kategori_lembur::with('jabatan')->get();
         $kategori_lembur = kategori_lembur::with('golongan')->get();
         $kategori_lembur = kategori_lembur::all();
+
+
+       if (request()->has('nama_kategori')) 
+       {
+           $kategori_lembur=kategori_lembur::where('nama_kategori',request('nama_kategori'))->paginate(5);
+       }
+       else
+       {
+           $kategori_lembur=kategori_lembur::paginate(5);
+       }
         return view('kategorilembur.index',compact('kategori_lembur'));
     }
 
