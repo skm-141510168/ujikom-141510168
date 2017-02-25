@@ -4,8 +4,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>My Aplication</title>
+<<<<<<< HEAD
 
 
+=======
+  
+  
+>>>>>>> 715ea6955697cfd909e760221a9806559fbc8aa3
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 

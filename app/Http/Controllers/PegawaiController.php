@@ -53,14 +53,49 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         //
         $this->validate($request,[
             'name' => 'required|max:255',
             'nip' => 'required|min:3|numeric|unique:pegawais',
+=======
+        $rules = [  'name' => 'required|max:255',
+            'nip'  => 'required|numeric|min:3|unique:pegawais',
+>>>>>>> 715ea6955697cfd909e760221a9806559fbc8aa3
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+<<<<<<< HEAD
             'permission' => 'required|max:255',
         ]);
+=======
+            'jabatan_id' => 'required',
+            'golongan_id' => 'required',
+            'photo' => 'required'];
+        $sms = ['nip.required' => 'Harus Diisi',
+                'nip.unique' => 'Data Sudah Ada',
+                'nip.numeric' => 'Harus Angka',
+                'email.required' => 'Harus Diisi',
+                'email.unique' => 'Data Sudah Ada',
+                'jabatan_id.required' => 'Harus Diisi',
+                'golongan_id.required' => 'Harus Diisi',
+                'photo.required' => 'Harus Diisi',
+                'email.email' => 'Harus Format Email',
+                'name.required' => 'Harus Diisi',
+                'password.min' => 'Sandi harus minimal 6 karakter',
+                'nip.min' => 'nip harus minimal 3.',
+                ];
+        $valid=Validator::make(Input::all(),$rules,$sms);
+        if ($valid->fails()) {
+
+            alert()->error('Data Salah');  
+            return redirect('pegawai/create')
+            ->withErrors($valid)
+            ->withInput();
+        }
+        else
+        {
+        alert()->success('Data Tersimpan');
+>>>>>>> 715ea6955697cfd909e760221a9806559fbc8aa3
         $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
@@ -104,6 +139,7 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         //
         //$pegawai=pegawai::with('User')->find($id);
         $pegawai=pegawai::find($id);
@@ -111,6 +147,15 @@ class PegawaiController extends Controller
         $golongan = golongan::all();
         $user = User::all();
         return view('pegawai.edit',compact('pegawai','jabatan','golongan','user'));
+=======
+      
+       $golongan=golongan::all();
+       $jabatan=jabatan::all(); 
+       $pegawai=pegawai::find($id);
+       $user=User::all();
+       return view('pegawai.edit',compact('golongan','jabatan','pegawai','user'));
+     
+>>>>>>> 715ea6955697cfd909e760221a9806559fbc8aa3
     }
 
     /**
@@ -122,6 +167,7 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         //
         // $pegawai1 = pegawai::where('id',$id)->first();
         // $user1 = User::where('id',$id)->first();
@@ -227,6 +273,27 @@ class PegawaiController extends Controller
 
         return redirect('/pegawai');
         }
+=======
+       
+        $file = Input::file('photo');
+        $destinationPath = public_path().'/assets/image/';
+        $filename = $file->getClientOriginalName();
+        $uploadSuccess = $file->move($destinationPath, $filename);
+        {
+        if(Input::hasFile('photo'))
+            $pegawai =pegawai::find('id');
+            $pegawai->nip =$request->get('nip');
+            $pegawai->jabatan_id =$request->get('jabatan_id');
+            $pegawai->golongan_id =$request->get('golongan_id');
+        } 
+            $user=User::all();
+           // $pegawai->user_id = $user->id;
+            $pegawai->photo = $filename;
+            $pegawai->update();
+               
+            return redirect('/pegawai');
+         
+>>>>>>> 715ea6955697cfd909e760221a9806559fbc8aa3
     }
 
     /**

@@ -25,8 +25,14 @@
 									<td bgcolor="white"><center>{{$data->User->email}}</td>
 									<td bgcolor="white"><center>{{$data->jabatan->nama_jabatan}}</td>
 									<td bgcolor="white"><center>{{$data->golongan->nama_golongan}}</td>
+<<<<<<< HEAD
 									<td><img src="{{ asset('assets/'.$data->photo) }}" width="50" height="50"></td>
                                     <td align="center">
+=======
+									<td bgcolor="white"><center><img src="assets/image
+									/{{$data->photo}}" width="50" height="50"></td>
+									<td align="right">
+>>>>>>> 715ea6955697cfd909e760221a9806559fbc8aa3
                                     <a href="{{route('pegawai.edit', $data->id)}}" class="btn btn-warning btn-sm"><i class="glyphicon glyphicon-edit"></i></a>
                                 </td>
 

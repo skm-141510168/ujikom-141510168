@@ -24,8 +24,17 @@ class PenggajianController extends Controller
      }
     public function index()
     {
+<<<<<<< HEAD
        $penggajian = penggajian::paginate(3);
         return view('penggajian.index',compact('penggajian'));
+=======
+        return view('penggajian.index');
+
+
+        $penggajian = penggajian::with('tunjangan_pegawai')->get();
+        $penggajian = penggajian::all();
+        return view('penggajian.index',compact('tunjangan_pegawai'));
+>>>>>>> 715ea6955697cfd909e760221a9806559fbc8aa3
     }
     /**
      * Show the form for creating a new resource.
